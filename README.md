@@ -25,8 +25,31 @@ http://127.0.0.1:4173/
 - `index.html`: 复习入口和阅读器
 - `styles.css`: 页面样式
 - `script.js`: Markdown 资料加载和渲染
+- `api/ask.js`: AI 问答后端代理函数, 读取 `DEEPSEEK_API_KEY`
 - `content/`: 复习资料 Markdown
 - `assets/hero-tech.png`: 首页视觉图
+
+## AI 问答配置
+
+不要把 DeepSeek API key 写进 `index.html`、`script.js` 或任何前端文件。
+
+GitHub Pages 只能托管静态页面, 不能运行 `api/ask.js`, 所以当前 Pages 地址会显示 AI 界面, 但没有后端时不能真正回答。要启用 AI 问答, 推荐把这个仓库部署到 Vercel:
+
+1. 在 Vercel 导入 `clear-winding/personal-site` 仓库。
+2. 在项目环境变量里添加:
+
+```text
+DEEPSEEK_API_KEY=你的 DeepSeek API key
+```
+
+3. 重新部署。
+
+可选环境变量:
+
+```text
+DEEPSEEK_MODEL=deepseek-v4-flash
+DEEPSEEK_API_URL=https://api.deepseek.com/chat/completions
+```
 
 ## 更新复习资料
 

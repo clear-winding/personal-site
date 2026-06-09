@@ -20,6 +20,7 @@
       <nav class="nav-links" aria-label="主导航">
         <a href="#courses">课程</a>
         <a href="#reader">阅读</a>
+        <a href="#ai">AI 问答</a>
         <a href="#plan">安排</a>
         <a href="#reader" data-open-doc="quick">速查</a>
       </nav>
@@ -115,6 +116,47 @@
               <p>正在加载复习资料...</p>
             </div>
           </article>
+        </div>
+      </section>
+
+      <section class="section ai-section" id="ai" aria-labelledby="ai-title">
+        <div class="section-inner ai-layout">
+          <div>
+            <p class="section-kicker">AI Tutor</p>
+            <h2 id="ai-title">带着当前资料提问</h2>
+            <p class="ai-intro">
+              先在上方打开某门课的讲解或题目，再问 AI。它会收到当前资料的部分内容作为上下文，更适合解释概念、整理答题思路和生成追问题。
+            </p>
+          </div>
+
+          <div class="ai-panel">
+            <div class="ai-status" data-ai-status>
+              当前连接: 等待提问
+            </div>
+            <div class="chat-log" data-chat-log aria-live="polite">
+              <div class="chat-message assistant">
+                <strong>AI</strong>
+                <p>问我某个概念、公式或者题目怎么做。我会尽量按期末复习的方式讲清楚。</p>
+              </div>
+            </div>
+            <form class="chat-form" data-chat-form>
+              <label for="ai-question">你的问题</label>
+              <textarea
+                id="ai-question"
+                name="question"
+                rows="4"
+                placeholder="例如: TCP 慢启动和拥塞避免怎么区分？"
+                required
+              ></textarea>
+              <div class="chat-actions">
+                <button type="submit" class="button primary" data-ask-button>提问</button>
+                <button type="button" class="button secondary" data-clear-chat>清空对话</button>
+              </div>
+            </form>
+            <p class="ai-note">
+              安全说明: API key 不在网页里。若当前站点部署在 GitHub Pages, 需要另行部署后端函数后 AI 才能真正回答。
+            </p>
+          </div>
         </div>
       </section>
 

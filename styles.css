@@ -471,6 +471,119 @@ h3 {
   background: var(--panel-strong);
 }
 
+.ai-section {
+  background: #151819;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.ai-layout {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(320px, 1.2fr);
+  gap: clamp(32px, 7vw, 90px);
+  align-items: start;
+}
+
+.ai-intro {
+  max-width: 540px;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.ai-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+
+.ai-status {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.chat-log {
+  display: grid;
+  max-height: 440px;
+  overflow-y: auto;
+  gap: 14px;
+  padding: 18px;
+}
+
+.chat-message {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  background: rgba(244, 240, 232, 0.04);
+}
+
+.chat-message.user {
+  background: rgba(103, 215, 209, 0.09);
+  border-color: rgba(103, 215, 209, 0.28);
+}
+
+.chat-message.assistant {
+  background: rgba(228, 179, 99, 0.09);
+  border-color: rgba(228, 179, 99, 0.28);
+}
+
+.chat-message strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text);
+  font-size: 13px;
+}
+
+.chat-message p {
+  margin-bottom: 0;
+  color: var(--muted);
+  white-space: pre-wrap;
+}
+
+.chat-form {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.chat-form label {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chat-form textarea {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: #101213;
+  color: var(--text);
+  font: inherit;
+  line-height: 1.55;
+}
+
+.chat-form textarea:focus {
+  outline: 2px solid rgba(103, 215, 209, 0.35);
+  outline-offset: 2px;
+}
+
+.chat-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ai-note {
+  margin: 0;
+  padding: 0 18px 18px;
+  color: var(--soft);
+  font-size: 13px;
+}
+
 .plan-item span {
   display: inline-flex;
   color: var(--green);
@@ -531,6 +644,10 @@ h3 {
     display: block;
   }
 
+  .ai-layout {
+    grid-template-columns: 1fr;
+  }
+
   .heading-note {
     margin-top: 14px;
   }
@@ -557,12 +674,14 @@ h3 {
   }
 
   .hero-actions,
-  .card-actions {
+  .card-actions,
+  .chat-actions {
     display: grid;
   }
 
   .button,
-  .card-actions button {
+  .card-actions button,
+  .chat-actions button {
     width: 100%;
   }
 

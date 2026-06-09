@@ -2,6 +2,11 @@ const header = document.querySelector("[data-header]");
 const readerTitle = document.querySelector("[data-doc-title]");
 const readerContent = document.querySelector("[data-reader-content]");
 const copyLinkButton = document.querySelector("[data-copy-link]");
+const chatForm = document.querySelector("[data-chat-form]");
+const chatLog = document.querySelector("[data-chat-log]");
+const aiStatus = document.querySelector("[data-ai-status]");
+const askButton = document.querySelector("[data-ask-button]");
+const clearChatButton = document.querySelector("[data-clear-chat]");
 
 const documents = {
   guide: {
@@ -39,6 +44,8 @@ const documents = {
 };
 
 let currentDoc = "quick";
+let currentMarkdown = "";
+let chatHistory = [];
 
 const updateHeader = () => {
   if (!header) return;
@@ -171,8 +178,10 @@ const openDocument = async (docId, options = {}) => {
     const response = await fetch(doc.file);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const markdown = await response.text();
+    currentMarkdown = markdown;
     if (readerContent) readerContent.innerHTML = renderMarkdown(markdown);
   } catch (error) {
+    currentMarkdown = "";
     if (readerContent) {
       readerContent.innerHTML =
         "<p>这份资料暂时没有加载成功。请刷新页面，或检查网络连接后再试。</p>";
@@ -191,6 +200,91 @@ document.querySelectorAll("[data-open-doc]").forEach((trigger) => {
     event.preventDefault();
     openDocument(trigger.dataset.openDoc, { scroll: true });
   });
+});
+
+const setAiStatus = (message) => {
+  if (aiStatus) aiStatus.textContent = `当前连接: ${message}`;
+};
+
+const appendMessage = (role, text) => {
+  if (!chatLog) return;
+  const message = document.createElement("div");
+  message.className = `chat-message ${role}`;
+  const label = role === "user" ? "你" : "AI";
+  message.innerHTML = `<strong>${label}</strong><p>${renderInline(text)}</p>`;
+  chatLog.appendChild(message);
+  chatLog.scrollTop = chatLog.scrollHeight;
+};
+
+const askAi = async (question) => {
+  const doc = documents[currentDoc] || documents.quick;
+  const context = currentMarkdown.slice(0, 12000);
+
+  setAiStatus("正在回答");
+  if (askButton) askButton.disabled = true;
+
+  try {
+    const response = await fetch("/api/ask", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        question,
+        contextTitle: doc.title,
+        context,
+        history: chatHistory.slice(-8),
+      }),
+    });
+
+    if (!response.ok) {
+      if ([404, 405, 501].includes(response.status)) {
+        throw new Error(
+          "AI 后端未部署。GitHub Pages 只能托管静态页面, 需要把本仓库部署到 Vercel 并设置 DEEPSEEK_API_KEY。",
+        );
+      }
+      let errorText = "";
+      try {
+        const errorData = await response.json();
+        errorText = errorData?.error || "";
+      } catch {
+        errorText = "";
+      }
+      throw new Error(errorText || `AI 请求失败: HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    const answer = data.answer || "没有拿到有效回答。";
+    appendMessage("assistant", answer);
+    chatHistory.push({ role: "assistant", content: answer });
+    setAiStatus("已连接");
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "AI 请求失败。请稍后再试。";
+    appendMessage("assistant", message);
+    setAiStatus("未配置或请求失败");
+  } finally {
+    if (askButton) askButton.disabled = false;
+  }
+};
+
+chatForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formData = new FormData(chatForm);
+  const question = String(formData.get("question") || "").trim();
+  if (!question) return;
+
+  appendMessage("user", question);
+  chatHistory.push({ role: "user", content: question });
+  chatForm.reset();
+  askAi(question);
+});
+
+clearChatButton?.addEventListener("click", () => {
+  chatHistory = [];
+  if (chatLog) {
+    chatLog.innerHTML =
+      '<div class="chat-message assistant"><strong>AI</strong><p>对话已清空。继续问我某个概念、公式或者题目怎么做。</p></div>';
+  }
+  setAiStatus("等待提问");
 });
 
 copyLinkButton?.addEventListener("click", async () => {
