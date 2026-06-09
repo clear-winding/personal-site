@@ -1,0 +1,202 @@
+# 期末速查: 公式与高频考点
+
+## Compile 编译原理
+
+### 主线
+
+```text
+字符流 -> token -> 语法树 -> 带属性语法树/符号表 -> IR -> 优化 IR -> 目标代码
+```
+
+### 高频必会
+
+- 正规式、NFA、DFA、最长匹配。
+- FIRST/FOLLOW、LL(1) 表。
+- 消除左递归、提取左公因子。
+- LR(0)/SLR/LR(1)/LALR 项目集和冲突。
+- 属性文法、综合属性、继承属性。
+- 三地址码、四元式、if/while/do-while 翻译。
+- 活动记录、栈/堆/静态分配、GC。
+- 基本块、CFG、DAG、数据流分析、循环优化。
+- 寄存器分配、图着色、spilling。
+
+### 常用模板
+
+直接左递归:
+
+```text
+A  -> A α | β
+A  -> β A'
+A' -> α A' | ε
+```
+
+while 翻译:
+
+```text
+L_begin:
+E.code
+ifFalse E.place goto L_after
+S.code
+goto L_begin
+L_after:
+```
+
+do-while 翻译:
+
+```text
+L_begin:
+S.code
+E.code
+ifTrue E.place goto L_begin
+```
+
+## Network 计算机网络
+
+### 分层速记
+
+```text
+应用层: HTTP DNS FTP Email DHCP
+传输层: TCP UDP 端口 可靠传输 拥塞控制
+网络层: IP 路由 子网 ARP ICMP NAT IPv6
+链路层: 帧 MAC 交换机 VLAN CRC 滑动窗口
+物理层: bit 信号 编码 调制 介质
+```
+
+### 时延
+
+```text
+传输时延 = L / R
+传播时延 = d / s
+总时延 = 处理 + 排队 + 传输 + 传播
+```
+
+### 信道容量
+
+```text
+Nyquist: C = 2B log2(V)
+Shannon: C = B log2(1 + S/N)
+dB = 10 log10(S/N)
+```
+
+### 滑动窗口
+
+```text
+GBN 最大窗口 = 2^k - 1
+SR 最大窗口 = 2^(k-1)
+```
+
+### 子网
+
+```text
+主机位 = 32 - 前缀长度
+地址数 = 2^主机位
+传统可用主机数 = 2^主机位 - 2
+网络地址 = IP & Mask
+最长前缀匹配 = 选最具体路由
+```
+
+### IP 分片
+
+- 每片数据长度不超过 `MTU - IP首部长度`。
+- 除最后一片外, 数据长度应是 8 Byte 的整数倍。
+- Fragment Offset 单位是 8 Byte。
+- 前面分片 `MF=1`, 最后一片 `MF=0`。
+
+### TCP
+
+```text
+发送窗口 = min(rwnd, cwnd)
+```
+
+- 三次握手: SYN, SYN+ACK, ACK。
+- 慢启动: 指数增长。
+- 拥塞避免: 线性增长。
+- 超时: 更严重, cwnd 通常回小。
+- 三个重复 ACK: 快速重传/快速恢复。
+
+## RISC-V 组成与体系结构
+
+### Amdahl 定律
+
+```text
+Sn = 1 / ((1 - Fe) + Fe / Se)
+极限 Sn <= 1 / (1 - Fe)
+```
+
+### CPU 性能
+
+```text
+CPU time = IC * CPI * Clock Cycle Time
+CPU time = IC * CPI / Clock Rate
+```
+
+### 补码
+
+```text
+n 位补码范围 = -2^(n-1) 到 2^(n-1)-1
+同号相加得异号 -> 溢出
+最高位进位与次高位进位不同 -> 溢出
+```
+
+### IEEE 754 单精度
+
+```text
+1 位符号 + 8 位阶码 + 23 位尾数
+value = (-1)^S * 1.fraction * 2^(E - 127)
+```
+
+### Cache
+
+```text
+命中率 H = 命中次数 / 总访问次数
+平均访问时间 TA = H*T1 + (1-H)*T2
+访问效率 e = T1 / TA
+直接映像: Cache块号 = 主存块号 mod Cache块数
+组相联: Cache组号 = 主存块号 mod Cache组数
+```
+
+地址划分:
+
+```text
+offset = log2(块大小 Byte)
+index/set = log2(行数或组数)
+tag = 地址总位数 - offset - index/set
+```
+
+### 总线
+
+```text
+总线带宽 = 总线宽度(bit) * 频率 / 8
+```
+
+### RISC-V 指令速记
+
+- `x0` 恒为 0。
+- R-type: `add rd, rs1, rs2`
+- I-type/load: `addi rd, rs1, imm`, `lw rd, imm(rs1)`
+- S-type/store: `sw rs2, imm(rs1)`
+- B-type/branch: `beq rs1, rs2, label`
+- U-type: `lui`, `auipc`
+- J-type: `jal`
+
+### 流水线
+
+```text
+五级: IF ID EX MEM WB
+CPI = 理想CPI + 平均停顿周期
+```
+
+三类冒险:
+
+- 结构冒险: 资源冲突。
+- 数据冒险: 结果未写回就被使用。
+- 控制冒险: 分支导致 PC 不确定。
+
+load-use:
+
+```text
+lw  x1, 0(x2)
+add x3, x1, x4
+```
+
+通常需要停顿 1 周期。

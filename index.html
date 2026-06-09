@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>赵劲博 | Personal Website</title>
+    <title>Term6 期末复习站</title>
     <meta
       name="description"
-      content="赵劲博的个人网站，展示计算机科学学习、课程项目、技术方向与联系方式。"
+      content="Term6 期末复习站，集中阅读 Compile、Network、RISC-V 的讲解、题目和速查表。"
     />
     <link rel="preload" href="assets/hero-tech.png" as="image" />
     <link rel="stylesheet" href="styles.css" />
@@ -14,14 +14,14 @@
   <body>
     <header class="site-header" data-header>
       <a class="brand" href="#top" aria-label="返回首页">
-        <span class="brand-mark">Z</span>
-        <span>赵劲博</span>
+        <span class="brand-mark">T6</span>
+        <span>期末复习站</span>
       </a>
       <nav class="nav-links" aria-label="主导航">
-        <a href="#about">关于</a>
-        <a href="#work">项目</a>
-        <a href="#skills">技能</a>
-        <a href="#contact">联系</a>
+        <a href="#courses">课程</a>
+        <a href="#reader">阅读</a>
+        <a href="#plan">安排</a>
+        <a href="#reader" data-open-doc="quick">速查</a>
       </nav>
     </header>
 
@@ -30,109 +30,126 @@
         <img class="hero-image" src="assets/hero-tech.png" alt="" />
         <div class="hero-shade" aria-hidden="true"></div>
         <div class="hero-content">
-          <p class="eyebrow">Computer Science Student</p>
-          <h1 id="hero-title">赵劲博</h1>
+          <p class="eyebrow">Compile · Network · RISC-V</p>
+          <h1 id="hero-title">Term6 期末复习站</h1>
           <p class="hero-copy">
-            关注编译原理、计算机网络与 RISC-V 体系结构，把复杂系统拆成清晰、可验证、能落地的工程作品。
+            把课件讲解、题目训练和公式速查放到一个页面里。打开就能复习，不再在一堆 PDF 和文件夹里来回找。
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#work">查看项目</a>
-            <a class="button secondary" href="#contact">联系我</a>
+            <a class="button primary" href="#courses">开始复习</a>
+            <a class="button secondary" href="#reader" data-open-doc="quick">打开速查表</a>
           </div>
         </div>
       </section>
 
-      <section class="section intro-band" id="about" aria-labelledby="about-title">
-        <div class="section-inner split">
-          <div>
-            <p class="section-kicker">About</p>
-            <h2 id="about-title">把底层知识变成可解释的作品</h2>
-          </div>
-          <div class="prose">
-            <p>
-              我正在系统学习计算机专业核心课程，尤其喜欢从“原理如何工作”一路追到“工程如何实现”。目前的学习重点包括编译器前端与优化、网络协议栈、RISC-V 指令系统、存储层次和 CPU 数据通路。
-            </p>
-            <p>
-              这个网站用于记录课程项目、实验之外的练习、复习资料整理和后续作品。页面内容保持简洁，方便之后直接替换成真实简历、GitHub 链接和项目截图。
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="work" aria-labelledby="work-title">
+      <section class="section intro-band" id="courses" aria-labelledby="courses-title">
         <div class="section-inner">
           <div class="section-heading">
-            <p class="section-kicker">Selected Work</p>
-            <h2 id="work-title">近期方向</h2>
+            <div>
+              <p class="section-kicker">Courses</p>
+              <h2 id="courses-title">三门课分开复习</h2>
+            </div>
+            <p class="heading-note">先看讲解，再刷题，最后背速查。</p>
           </div>
 
-          <div class="work-grid">
-            <article class="work-item">
-              <div class="work-meta">Compiler</div>
-              <h3>编译原理复习与中间代码练习</h3>
-              <p>
-                梳理词法分析、LL/LR 语法分析、语法制导翻译、三地址码、基本块与数据流分析，沉淀成可复用的复习笔记和题目集。
-              </p>
+          <div class="course-grid">
+            <article class="course-card">
+              <span class="course-index">01</span>
+              <h3>Compile 编译原理</h3>
+              <p>词法、语法、语义、中间代码、运行时、优化、目标代码生成。</p>
+              <div class="card-actions">
+                <button type="button" data-open-doc="compile-notes">完整讲解</button>
+                <button type="button" data-open-doc="compile-questions">题目训练</button>
+              </div>
             </article>
-            <article class="work-item">
-              <div class="work-meta">Network</div>
-              <h3>计算机网络协议栈学习</h3>
-              <p>
-                围绕 TCP/IP 分层、路由算法、子网划分、TCP 可靠传输和拥塞控制做系统化整理，强调公式、流程和典型题。
-              </p>
+
+            <article class="course-card">
+              <span class="course-index">02</span>
+              <h3>Network 计算机网络</h3>
+              <p>分层、物理层、链路层、MAC、网络层、传输层、应用层。</p>
+              <div class="card-actions">
+                <button type="button" data-open-doc="network-notes">完整讲解</button>
+                <button type="button" data-open-doc="network-questions">题目训练</button>
+              </div>
             </article>
-            <article class="work-item">
-              <div class="work-meta">Architecture</div>
-              <h3>RISC-V 与组成体系结构</h3>
-              <p>
-                关注 ISA、寻址方式、Cache 映像、虚拟存储器、总线与 CPU 流水线，练习从指令到数据通路的完整解释。
-              </p>
+
+            <article class="course-card">
+              <span class="course-index">03</span>
+              <h3>RISC-V 组成体系结构</h3>
+              <p>数据表示、指令系统、总线与 I/O、Cache、虚拟存储、CPU 流水线。</p>
+              <div class="card-actions">
+                <button type="button" data-open-doc="riscv-notes">完整讲解</button>
+                <button type="button" data-open-doc="riscv-questions">题目训练</button>
+              </div>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section skills-band" id="skills" aria-labelledby="skills-title">
+      <section class="section reader-section" id="reader" aria-labelledby="reader-title">
+        <div class="section-inner reader-layout">
+          <aside class="library" aria-label="复习资料列表">
+            <p class="section-kicker">Library</p>
+            <h2 id="reader-title">复习资料</h2>
+            <div class="library-list">
+              <button type="button" data-open-doc="guide">整理说明</button>
+              <button type="button" data-open-doc="quick">期末速查</button>
+              <button type="button" data-open-doc="compile-notes">Compile 讲解</button>
+              <button type="button" data-open-doc="compile-questions">Compile 题目</button>
+              <button type="button" data-open-doc="network-notes">Network 讲解</button>
+              <button type="button" data-open-doc="network-questions">Network 题目</button>
+              <button type="button" data-open-doc="riscv-notes">RISC-V 讲解</button>
+              <button type="button" data-open-doc="riscv-questions">RISC-V 题目</button>
+            </div>
+          </aside>
+
+          <article class="reader-panel" aria-live="polite">
+            <div class="reader-toolbar">
+              <div>
+                <p class="reader-label">当前资料</p>
+                <h3 data-doc-title>期末速查</h3>
+              </div>
+              <button type="button" class="compact-button" data-copy-link>复制当前链接</button>
+            </div>
+            <div class="reader-content" data-reader-content>
+              <p>正在加载复习资料...</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section plan-section" id="plan" aria-labelledby="plan-title">
         <div class="section-inner">
           <div class="section-heading">
-            <p class="section-kicker">Skills</p>
-            <h2 id="skills-title">技术栈与能力</h2>
+            <div>
+              <p class="section-kicker">Plan</p>
+              <h2 id="plan-title">推荐复习节奏</h2>
+            </div>
           </div>
 
-          <div class="skill-list" aria-label="技能列表">
-            <div class="skill-row">
-              <span>Languages</span>
-              <p>C/C++, Python, JavaScript, RISC-V Assembly</p>
+          <div class="plan-grid">
+            <div class="plan-item">
+              <span>Step 1</span>
+              <h3>先读讲解</h3>
+              <p>每门课先从完整讲解过一遍，目标是把主线串起来，不急着背细枝末节。</p>
             </div>
-            <div class="skill-row">
-              <span>Systems</span>
-              <p>Compiler basics, TCP/IP, Computer Architecture, Operating Systems fundamentals</p>
+            <div class="plan-item">
+              <span>Step 2</span>
+              <h3>再刷题目</h3>
+              <p>遮住答案要点自己做。做不出来的题，回到讲解里补对应概念。</p>
             </div>
-            <div class="skill-row">
-              <span>Tools</span>
-              <p>Git, Markdown, Wireshark, Linux basics, Static web development</p>
+            <div class="plan-item">
+              <span>Step 3</span>
+              <h3>最后速查</h3>
+              <p>考前用速查表复盘公式、模板和高频题型，专门抓容易混的点。</p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section contact-section" id="contact" aria-labelledby="contact-title">
-        <div class="section-inner contact-layout">
-          <div>
-            <p class="section-kicker">Contact</p>
-            <h2 id="contact-title">一起把想法做成作品</h2>
-          </div>
-          <div class="contact-panel">
-            <a href="mailto:hello@example.com">hello@example.com</a>
-            <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
-            <a href="#" aria-label="简历链接占位">Resume</a>
           </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <span>© <span data-year></span> 赵劲博</span>
+      <span>Term6 Final Review</span>
       <a href="#top">Back to top</a>
     </footer>
 
