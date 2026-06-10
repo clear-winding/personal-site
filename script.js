@@ -111,12 +111,13 @@ const renderMarkdown = (markdown) => {
     listType = null;
   };
 
-  const openList = (type) => {
+  const openList = (type, start = "") => {
     flushParagraph();
     if (listType === type) return;
     closeList();
     listType = type;
-    html += `<${type}>`;
+    const startAttribute = type === "ol" && start ? ` start="${start}"` : "";
+    html += `<${type}${startAttribute}>`;
   };
 
   for (const line of lines) {
@@ -163,10 +164,10 @@ const renderMarkdown = (markdown) => {
       continue;
     }
 
-    const ordered = trimmed.match(/^\d+\.\s+(.+)$/);
+    const ordered = trimmed.match(/^(\d+)\.\s+(.+)$/);
     if (ordered) {
-      openList("ol");
-      html += `<li>${renderInline(ordered[1])}</li>`;
+      openList("ol", ordered[1]);
+      html += `<li>${renderInline(ordered[2])}</li>`;
       continue;
     }
 
