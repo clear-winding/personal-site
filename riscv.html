@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RISC-V 组成体系结构 | Term6 期末复习站</title>
+    <meta
+      name="description"
+      content="RISC-V 组成体系结构独立复习页，包含完整讲解、期末题目和重点难点详解。"
+    />
+    <link rel="preload" href="assets/hero-tech.png" as="image" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body
+    class="course-page"
+    data-default-doc="riscv-notes"
+    data-doc-scope="riscv-notes riscv-questions deep-dive quick"
+  >
+    <header class="site-header" data-header>
+      <a class="brand" href="index.html" aria-label="返回首页">
+        <span class="brand-mark">T6</span>
+        <span>期末复习站</span>
+      </a>
+      <nav class="nav-links" aria-label="RISC-V 页面导航">
+        <a href="index.html#courses">首页</a>
+        <a href="#reader" data-open-doc="riscv-notes">讲解</a>
+        <a href="#reader" data-open-doc="riscv-questions">题目</a>
+        <a href="#reader" data-open-doc="deep-dive">难点</a>
+        <a href="#reader" data-open-doc="quick">速查</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero course-hero" aria-labelledby="hero-title">
+        <img class="hero-image" src="assets/hero-tech.png" alt="" />
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Course 03</p>
+          <h1 id="hero-title">RISC-V 组成体系结构</h1>
+          <p class="hero-copy">
+            按软硬件接口复习：数据表示、指令系统、运算器、总线与 I/O、存储层次和 CPU 流水线。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#reader" data-open-doc="riscv-notes">完整讲解</a>
+            <a class="button secondary" href="#reader" data-open-doc="riscv-questions">题目训练</a>
+            <a class="button secondary" href="#reader" data-open-doc="deep-dive">重点难点</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reader-section" id="reader" aria-labelledby="reader-title">
+        <div class="section-inner reader-layout">
+          <aside class="library" aria-label="RISC-V 复习资料列表">
+            <p class="section-kicker">RISC-V</p>
+            <h2 id="reader-title">本课资料</h2>
+            <div class="library-list">
+              <button type="button" data-open-doc="riscv-notes">完整讲解</button>
+              <button type="button" data-open-doc="riscv-questions">期末题目</button>
+              <button type="button" data-open-doc="deep-dive">重点难点详解</button>
+              <button type="button" data-open-doc="quick">期末速查</button>
+            </div>
+          </aside>
+
+          <article class="reader-panel" aria-live="polite">
+            <div class="reader-toolbar">
+              <div>
+                <p class="reader-label">当前资料</p>
+                <h3 data-doc-title>RISC-V 完整讲解</h3>
+              </div>
+              <button type="button" class="compact-button" data-copy-link>复制当前链接</button>
+            </div>
+            <div class="reader-content" data-reader-content>
+              <p>正在加载复习资料...</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section plan-section" aria-labelledby="plan-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Route</p>
+              <h2 id="plan-title">RISC-V 复习顺序</h2>
+            </div>
+          </div>
+          <div class="plan-grid">
+            <div class="plan-item">
+              <span>Step 1</span>
+              <h3>先掌握公式</h3>
+              <p>Amdahl、CPU time、补码范围、浮点数、Cache 平均访问时间都要会算。</p>
+            </div>
+            <div class="plan-item">
+              <span>Step 2</span>
+              <h3>再看结构题</h3>
+              <p>指令格式、寻址方式、总线、I/O、虚拟存储和控制器要能画清关系。</p>
+            </div>
+            <div class="plan-item">
+              <span>Step 3</span>
+              <h3>最后攻流水线</h3>
+              <p>结构冒险、数据冒险、控制冒险和 load-use 停顿是高频考点。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a href="index.html">返回首页</a>
+      <a href="#top">Back to top</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -11,7 +11,7 @@
     <link rel="preload" href="assets/hero-tech.png" as="image" />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body data-default-doc="quick" data-doc-scope="guide quick deep-dive">
     <header class="site-header" data-header>
       <a class="brand" href="#top" aria-label="返回首页">
         <span class="brand-mark">T6</span>
@@ -34,7 +34,7 @@
           <p class="eyebrow">Compile · Network · RISC-V</p>
           <h1 id="hero-title">Term6 期末复习站</h1>
           <p class="hero-copy">
-            把课件讲解、题目训练和公式速查放到一个页面里。打开就能复习，不再在一堆 PDF 和文件夹里来回找。
+            三门课拆成独立复习页面：首页看总速查和总难点，进入对应课程后再读讲解、刷题和补知识点。
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#courses">开始复习</a>
@@ -49,9 +49,9 @@
           <div class="section-heading">
             <div>
               <p class="section-kicker">Courses</p>
-              <h2 id="courses-title">三门课分开复习</h2>
+              <h2 id="courses-title">三门课独立页面</h2>
             </div>
-            <p class="heading-note">先看讲解，再刷题，最后背速查。</p>
+            <p class="heading-note">每门课都有自己的讲解、题目和重点难点入口。</p>
           </div>
 
           <div class="course-grid">
@@ -60,8 +60,8 @@
               <h3>Compile 编译原理</h3>
               <p>词法、语法、语义、中间代码、运行时、优化、目标代码生成。</p>
               <div class="card-actions">
-                <button type="button" data-open-doc="compile-notes">完整讲解</button>
-                <button type="button" data-open-doc="compile-questions">题目训练</button>
+                <a href="compile.html">进入本课</a>
+                <a href="compile.html?doc=compile-questions#reader">题目训练</a>
               </div>
             </article>
 
@@ -70,8 +70,8 @@
               <h3>Network 计算机网络</h3>
               <p>分层、物理层、链路层、MAC、网络层、传输层、应用层。</p>
               <div class="card-actions">
-                <button type="button" data-open-doc="network-notes">完整讲解</button>
-                <button type="button" data-open-doc="network-questions">题目训练</button>
+                <a href="network.html">进入本课</a>
+                <a href="network.html?doc=network-questions#reader">题目训练</a>
               </div>
             </article>
 
@@ -80,8 +80,8 @@
               <h3>RISC-V 组成体系结构</h3>
               <p>数据表示、指令系统、总线与 I/O、Cache、虚拟存储、CPU 流水线。</p>
               <div class="card-actions">
-                <button type="button" data-open-doc="riscv-notes">完整讲解</button>
-                <button type="button" data-open-doc="riscv-questions">题目训练</button>
+                <a href="riscv.html">进入本课</a>
+                <a href="riscv.html?doc=riscv-questions#reader">题目训练</a>
               </div>
             </article>
           </div>
@@ -97,12 +97,6 @@
               <button type="button" data-open-doc="guide">整理说明</button>
               <button type="button" data-open-doc="quick">期末速查</button>
               <button type="button" data-open-doc="deep-dive">重点难点详解</button>
-              <button type="button" data-open-doc="compile-notes">Compile 讲解</button>
-              <button type="button" data-open-doc="compile-questions">Compile 题目</button>
-              <button type="button" data-open-doc="network-notes">Network 讲解</button>
-              <button type="button" data-open-doc="network-questions">Network 题目</button>
-              <button type="button" data-open-doc="riscv-notes">RISC-V 讲解</button>
-              <button type="button" data-open-doc="riscv-questions">RISC-V 题目</button>
             </div>
           </aside>
 

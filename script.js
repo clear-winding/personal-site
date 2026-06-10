@@ -44,6 +44,12 @@ const documents = {
 
 let currentDoc = "quick";
 let currentAnchor = "";
+const defaultDoc = document.body.dataset.defaultDoc || "quick";
+const docScope = (document.body.dataset.docScope || "")
+  .split(/\s+/)
+  .filter(Boolean);
+
+const isDocAllowed = (docId) => !docScope.length || docScope.includes(docId);
 
 const updateHeader = () => {
   if (!header) return;
@@ -204,9 +210,11 @@ const scrollToReader = (anchor = "") => {
 };
 
 const openDocument = async (docId, options = {}) => {
-  const doc = documents[docId] || documents.quick;
-  currentDoc = documents[docId] ? docId : "quick";
-  currentAnchor = options.anchor || "";
+  const canOpenRequestedDoc = documents[docId] && isDocAllowed(docId);
+  const requestedDoc = canOpenRequestedDoc ? docId : defaultDoc;
+  const doc = documents[requestedDoc] || documents.quick;
+  currentDoc = documents[requestedDoc] ? requestedDoc : "quick";
+  currentAnchor = canOpenRequestedDoc ? options.anchor || "" : "";
   setActiveButton(currentDoc);
 
   if (readerTitle) readerTitle.textContent = doc.title;
@@ -248,7 +256,7 @@ readerContent?.addEventListener("click", (event) => {
     url.origin === window.location.origin && url.pathname === window.location.pathname;
   const docId = url.searchParams.get("doc");
 
-  if (!samePage || !docId || !documents[docId]) return;
+  if (!samePage || !docId || !documents[docId] || !isDocAllowed(docId)) return;
 
   event.preventDefault();
   openDocument(docId, {
@@ -284,7 +292,7 @@ copyLinkButton?.addEventListener("click", async () => {
 });
 
 const initialParams = new URLSearchParams(window.location.search);
-const initialDoc = initialParams.get("doc") || "quick";
+const initialDoc = initialParams.get("doc") || defaultDoc;
 const initialAnchor = initialParams.get("anchor") || "";
 
 updateHeader();

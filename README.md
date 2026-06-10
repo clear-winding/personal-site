@@ -23,6 +23,9 @@ http://127.0.0.1:4173/
 ## 内容结构
 
 - `index.html`: 复习入口和阅读器
+- `compile.html`: Compile 编译原理独立复习页
+- `network.html`: Network 计算机网络独立复习页
+- `riscv.html`: RISC-V 组成体系结构独立复习页
 - `styles.css`: 页面样式
 - `script.js`: Markdown 资料加载和渲染
 - `content/`: 复习资料 Markdown

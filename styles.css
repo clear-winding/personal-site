@@ -99,6 +99,7 @@ button {
 }
 
 .nav-links {
+  flex-wrap: wrap;
   gap: clamp(14px, 3vw, 30px);
   color: var(--muted);
   font-size: 14px;
@@ -207,6 +208,7 @@ h3 {
 }
 
 .button,
+.card-actions a,
 .card-actions button,
 .library-list button,
 .compact-button {
@@ -222,6 +224,7 @@ h3 {
 }
 
 .button.primary,
+.card-actions a:first-child,
 .card-actions button:first-child {
   background: var(--text);
   color: var(--bg);
@@ -230,6 +233,8 @@ h3 {
 
 .button:hover,
 .button:focus-visible,
+.card-actions a:hover,
+.card-actions a:focus-visible,
 .card-actions button:hover,
 .card-actions button:focus-visible,
 .library-list button:hover,
@@ -306,6 +311,14 @@ h3 {
 
 .card-actions {
   margin-top: 24px;
+}
+
+.course-hero {
+  min-height: 68vh;
+}
+
+.course-hero .hero-content {
+  width: min(820px, 100%);
 }
 
 .reader-section {
@@ -582,6 +595,7 @@ h3 {
   }
 
   .button,
+  .card-actions a,
   .card-actions button {
     width: 100%;
   }
