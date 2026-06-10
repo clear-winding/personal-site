@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>软件工程基础 | Term6 期末复习站</title>
+    <meta
+      name="description"
+      content="软件工程基础独立复习页，包含完整讲解、期末题目和重点难点详解。"
+    />
+    <link rel="preload" href="assets/hero-tech.png" as="image" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body
+    class="course-page"
+    data-default-doc="software-notes"
+    data-doc-scope="software-notes software-questions deep-dive quick"
+  >
+    <header class="site-header" data-header>
+      <a class="brand" href="index.html" aria-label="返回首页">
+        <span class="brand-mark">T6</span>
+        <span>期末复习站</span>
+      </a>
+      <nav class="nav-links" aria-label="软件工程基础页面导航">
+        <a href="index.html#courses">首页</a>
+        <a href="#reader" data-open-doc="software-notes">讲解</a>
+        <a href="#reader" data-open-doc="software-questions">题目</a>
+        <a href="#reader" data-open-doc="deep-dive">难点</a>
+        <a href="#reader" data-open-doc="quick">速查</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero course-hero" aria-labelledby="hero-title">
+        <img class="hero-image" src="assets/hero-tech.png" alt="" />
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Course 04</p>
+          <h1 id="hero-title">软件工程基础</h1>
+          <p class="hero-copy">
+            按软件生命周期复习：过程模型、需求工程、设计方法、软件测试、UML、维护和项目管理。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#reader" data-open-doc="software-notes">完整讲解</a>
+            <a class="button secondary" href="#reader" data-open-doc="software-questions">题目训练</a>
+            <a class="button secondary" href="#reader" data-open-doc="deep-dive">重点难点</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reader-section" id="reader" aria-labelledby="reader-title">
+        <div class="section-inner reader-layout">
+          <aside class="library" aria-label="软件工程基础复习资料列表">
+            <p class="section-kicker">Software</p>
+            <h2 id="reader-title">本课资料</h2>
+            <div class="library-list">
+              <button type="button" data-open-doc="software-notes">完整讲解</button>
+              <button type="button" data-open-doc="software-questions">期末题目</button>
+              <button type="button" data-open-doc="deep-dive">重点难点详解</button>
+              <button type="button" data-open-doc="quick">期末速查</button>
+            </div>
+          </aside>
+
+          <article class="reader-panel" aria-live="polite">
+            <div class="reader-toolbar">
+              <div>
+                <p class="reader-label">当前资料</p>
+                <h3 data-doc-title>软件工程基础完整讲解</h3>
+              </div>
+              <button type="button" class="compact-button" data-copy-link>复制当前链接</button>
+            </div>
+            <div class="reader-content" data-reader-content>
+              <p>正在加载复习资料...</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section plan-section" aria-labelledby="plan-title">
+        <div class="section-inner">
+          <div class="section-heading">
+            <div>
+              <p class="section-kicker">Route</p>
+              <h2 id="plan-title">软件工程复习顺序</h2>
+            </div>
+          </div>
+          <div class="plan-grid">
+            <div class="plan-item">
+              <span>Step 1</span>
+              <h3>先串生命周期</h3>
+              <p>把过程模型、需求、设计、实现、测试、维护放到一条线上记。</p>
+            </div>
+            <div class="plan-item">
+              <span>Step 2</span>
+              <h3>再抓建模和测试</h3>
+              <p>DFD、SRS、高内聚低耦合、白盒黑盒、UML 是最容易出题的部分。</p>
+            </div>
+            <div class="plan-item">
+              <span>Step 3</span>
+              <h3>最后背管理题</h3>
+              <p>维护分类、LOC、FP、甘特图、网络图、CMM、基线适合考前集中速记。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a href="index.html">返回首页</a>
+      <a href="#top">Back to top</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

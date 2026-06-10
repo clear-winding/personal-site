@@ -16,6 +16,14 @@ const documents = {
     title: "重点难点详解",
     file: "content/deep-dive.md",
   },
+  "software-notes": {
+    title: "软件工程基础完整讲解",
+    file: "content/software-notes.md",
+  },
+  "software-questions": {
+    title: "软件工程基础期末题目",
+    file: "content/software-questions.md",
+  },
   "compile-notes": {
     title: "Compile 完整讲解",
     file: "content/compile-notes.md",

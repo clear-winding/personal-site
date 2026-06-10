@@ -200,3 +200,50 @@ add x3, x1, x4
 ```
 
 通常需要停顿 1 周期。
+
+## Software Engineering 软件工程基础
+
+### 主线
+
+```text
+软件危机 -> 过程模型 -> 需求工程 -> 设计 -> 实现 -> 测试 -> 维护 -> 项目管理
+```
+
+### 高频必会
+
+- [软件 = 程序 + 数据 + 文档](?doc=deep-dive&anchor=software-crisis#reader)，软件工程三要素 = 方法、工具、过程。
+- [过程模型](?doc=deep-dive&anchor=software-process-models#reader): 瀑布适合需求明确，原型适合需求不清，增量适合分批交付，螺旋强调风险，敏捷强调快速反馈。
+- [需求工程](?doc=deep-dive&anchor=software-requirements#reader): 可行性分析、需求获取、需求分析建模、SRS、需求评审、变更管理。
+- [DFD](?doc=deep-dive&anchor=software-dfd#reader): 外部实体、加工、数据流、数据存储。箭头是数据流，不是控制流。
+- [软件设计](?doc=deep-dive&anchor=software-design#reader): 概要设计管结构，详细设计管模块内部过程。
+- [高内聚低耦合](?doc=deep-dive&anchor=software-cohesion-coupling#reader): 功能内聚最好，内容耦合最差。
+- [结构化设计](?doc=deep-dive&anchor=software-structured-design#reader): 变换分析看输入-处理-输出，事务分析看事务中心和多条路径。
+- [测试](?doc=deep-dive&anchor=software-testing#reader): 测试是为了发现错误，不是证明无错。
+- [白盒测试](?doc=deep-dive&anchor=software-white-box#reader): `V(G)=判定结点数+1`。
+- [黑盒测试](?doc=deep-dive&anchor=software-black-box#reader): 等价类、边界值、因果图、判定表。
+- [UML](?doc=deep-dive&anchor=software-uml#reader): 用例图看功能，类图看静态结构，顺序图看消息顺序，状态图看状态变化。
+- [维护](?doc=deep-dive&anchor=software-maintenance#reader): 纠错、适应、完善、预防。
+- [项目管理](?doc=deep-dive&anchor=software-project-management#reader): LOC、FP、甘特图、网络图、CMM、配置管理基线。
+
+### 常用模板
+
+可行性分析:
+
+```text
+技术可行性 + 经济可行性 + 操作可行性 + 法律可行性
+```
+
+SRS 质量:
+
+```text
+正确 完整 一致 可行 可理解 可验证 可修改 可追踪
+```
+
+维护分类:
+
+```text
+修错误 -> 纠错性维护
+适应环境 -> 适应性维护
+加功能/提性能 -> 完善性维护
+提前改进质量 -> 预防性维护
+```

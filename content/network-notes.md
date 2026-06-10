@@ -19,6 +19,18 @@
 - [TCP 拥塞控制](?doc=deep-dive&anchor=network-tcp-congestion#reader)
 - [DNS、HTTP、DHCP](?doc=deep-dive&anchor=network-dns-http-dhcp#reader)
 
+## 新资料补充: 计算题和协议流程题
+
+根据你给的 `计算机网络` 文件夹，补充资料和往年题更偏“公式计算 + 协议过程解释”。做题时先判断层次，再判断是计算题还是流程题。
+
+- 时延题先统一单位，再分清 [传输时延](?doc=deep-dive&anchor=network-delay#reader) 和传播时延。传输是把比特推上链路，传播是信号在介质中走。
+- 信道容量题先看题目是否说有噪声。无噪声且给信号级数用 Nyquist；有噪声且给 SNR 用 Shannon；给 dB 要先换成普通信噪比。
+- 链路层题常考 CRC、停等、GBN、SR。GBN 出错后从错帧开始重传，SR 只重传错帧，但窗口不能超过序号空间一半。
+- MAC 题要会比较 CSMA/CD 和 CSMA/CA。无线网络难以碰撞检测，隐藏终端也会导致冲突，所以使用碰撞避免和 ACK。
+- 网络层题高频是子网、CIDR、最长前缀匹配、IP 分片。分片偏移单位是 8 Byte，除最后一片外数据长度要取 8 的倍数。
+- TCP 题高频是 seq/ack、三次握手、四次挥手、流量控制和拥塞控制。发送窗口等于 `min(rwnd, cwnd)`。
+- 应用层题要会按顺序写 DNS、HTTP、DHCP。浏览器访问网页常串起 DNS、TCP、HTTP、IP、ARP、以太网多个层次。
+
 ## 0. 一句话总览
 
 计算机网络研究的是: 不同主机如何通过协议分层、交换、寻址、路由、可靠传输和应用协议完成通信。

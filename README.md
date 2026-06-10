@@ -1,10 +1,11 @@
 # Term6 期末复习站
 
-这是一个用于期末复习的静态网站, 集中展示三门课的讲解、题目和速查表:
+这是一个用于期末复习的静态网站, 集中展示四门课的讲解、题目和速查表:
 
 - Compile 编译原理
 - Network 计算机网络
 - RISC-V 组成与体系结构
+- 软件工程基础
 
 ## 本地预览
 
@@ -26,6 +27,7 @@ http://127.0.0.1:4173/
 - `compile.html`: Compile 编译原理独立复习页
 - `network.html`: Network 计算机网络独立复习页
 - `riscv.html`: RISC-V 组成体系结构独立复习页
+- `software.html`: 软件工程基础独立复习页
 - `styles.css`: 页面样式
 - `script.js`: Markdown 资料加载和渲染
 - `content/`: 复习资料 Markdown

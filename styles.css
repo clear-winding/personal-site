@@ -276,10 +276,17 @@ h3 {
 .course-grid,
 .plan-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1px;
   background: var(--line);
   border: 1px solid var(--line);
+}
+
+.course-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.plan-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .course-card,
@@ -297,6 +304,10 @@ h3 {
 .course-card:nth-child(3),
 .plan-item:nth-child(3) {
   background: #1e2020;
+}
+
+.course-card:nth-child(4) {
+  background: #192123;
 }
 
 .course-index {
