@@ -2,11 +2,6 @@ const header = document.querySelector("[data-header]");
 const readerTitle = document.querySelector("[data-doc-title]");
 const readerContent = document.querySelector("[data-reader-content]");
 const copyLinkButton = document.querySelector("[data-copy-link]");
-const chatForm = document.querySelector("[data-chat-form]");
-const chatLog = document.querySelector("[data-chat-log]");
-const aiStatus = document.querySelector("[data-ai-status]");
-const askButton = document.querySelector("[data-ask-button]");
-const clearChatButton = document.querySelector("[data-clear-chat]");
 
 const documents = {
   guide: {
@@ -16,6 +11,10 @@ const documents = {
   quick: {
     title: "期末速查",
     file: "content/quick.md",
+  },
+  "deep-dive": {
+    title: "重点难点详解",
+    file: "content/deep-dive.md",
   },
   "compile-notes": {
     title: "Compile 完整讲解",
@@ -44,8 +43,7 @@ const documents = {
 };
 
 let currentDoc = "quick";
-let currentMarkdown = "";
-let chatHistory = [];
+let currentAnchor = "";
 
 const updateHeader = () => {
   if (!header) return;
@@ -59,11 +57,33 @@ const escapeHtml = (value) =>
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
 
+const isSafeHref = (href) =>
+  href.startsWith("#") || href.startsWith("?") || /^https?:\/\//i.test(href);
+
 const renderInline = (value) => {
   let html = escapeHtml(value);
+
+  html = html.replace(/\[([^\]]+?)\]\(([^)\s]+?)\)/g, (match, label, href) => {
+    const cleanHref = href.trim();
+    if (!isSafeHref(cleanHref)) return match;
+    return `<a href="${cleanHref}">${label}</a>`;
+  });
+
   html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   html = html.replace(/`([^`]+?)`/g, "<code>$1</code>");
   return html;
+};
+
+const parseHeading = (rawText) => {
+  const explicitId = rawText.match(/\s*\{#([A-Za-z0-9_-]+)\}\s*$/);
+  if (explicitId) {
+    return {
+      id: explicitId[1],
+      text: rawText.replace(/\s*\{#[A-Za-z0-9_-]+\}\s*$/, "").trim(),
+    };
+  }
+
+  return { id: "", text: rawText };
 };
 
 const renderMarkdown = (markdown) => {
@@ -124,7 +144,9 @@ const renderMarkdown = (markdown) => {
       flushParagraph();
       closeList();
       const level = heading[1].length;
-      html += `<h${level}>${renderInline(heading[2])}</h${level}>`;
+      const parsed = parseHeading(heading[2]);
+      const idAttribute = parsed.id ? ` id="${parsed.id}"` : "";
+      html += `<h${level}${idAttribute}>${renderInline(parsed.text)}</h${level}>`;
       continue;
     }
 
@@ -159,16 +181,32 @@ const setActiveButton = (docId) => {
   });
 };
 
-const setUrlDoc = (docId) => {
+const setUrlDoc = (docId, anchor = "") => {
   const url = new URL(window.location.href);
   url.searchParams.set("doc", docId);
+
+  if (anchor) {
+    url.searchParams.set("anchor", anchor);
+  } else {
+    url.searchParams.delete("anchor");
+  }
+
   url.hash = "reader";
   window.history.replaceState({}, "", url);
+};
+
+const scrollToReader = (anchor = "") => {
+  window.requestAnimationFrame(() => {
+    const target = anchor ? document.getElementById(anchor) : null;
+    const fallback = document.getElementById("reader");
+    (target || fallback)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 };
 
 const openDocument = async (docId, options = {}) => {
   const doc = documents[docId] || documents.quick;
   currentDoc = documents[docId] ? docId : "quick";
+  currentAnchor = options.anchor || "";
   setActiveButton(currentDoc);
 
   if (readerTitle) readerTitle.textContent = doc.title;
@@ -178,20 +216,19 @@ const openDocument = async (docId, options = {}) => {
     const response = await fetch(doc.file);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const markdown = await response.text();
-    currentMarkdown = markdown;
     if (readerContent) readerContent.innerHTML = renderMarkdown(markdown);
-  } catch (error) {
-    currentMarkdown = "";
+  } catch {
+    currentAnchor = "";
     if (readerContent) {
       readerContent.innerHTML =
         "<p>这份资料暂时没有加载成功。请刷新页面，或检查网络连接后再试。</p>";
     }
   }
 
-  setUrlDoc(currentDoc);
+  setUrlDoc(currentDoc, currentAnchor);
 
-  if (options.scroll) {
-    document.getElementById("reader")?.scrollIntoView({ behavior: "smooth" });
+  if (options.scroll || currentAnchor) {
+    scrollToReader(currentAnchor);
   }
 };
 
@@ -202,94 +239,34 @@ document.querySelectorAll("[data-open-doc]").forEach((trigger) => {
   });
 });
 
-const setAiStatus = (message) => {
-  if (aiStatus) aiStatus.textContent = `当前连接: ${message}`;
-};
+readerContent?.addEventListener("click", (event) => {
+  const link = event.target.closest("a");
+  if (!link) return;
 
-const appendMessage = (role, text) => {
-  if (!chatLog) return;
-  const message = document.createElement("div");
-  message.className = `chat-message ${role}`;
-  const label = role === "user" ? "你" : "AI";
-  message.innerHTML = `<strong>${label}</strong><p>${renderInline(text)}</p>`;
-  chatLog.appendChild(message);
-  chatLog.scrollTop = chatLog.scrollHeight;
-};
+  const url = new URL(link.href, window.location.href);
+  const samePage =
+    url.origin === window.location.origin && url.pathname === window.location.pathname;
+  const docId = url.searchParams.get("doc");
 
-const askAi = async (question) => {
-  const doc = documents[currentDoc] || documents.quick;
-  const context = currentMarkdown.slice(0, 12000);
+  if (!samePage || !docId || !documents[docId]) return;
 
-  setAiStatus("正在回答");
-  if (askButton) askButton.disabled = true;
-
-  try {
-    const response = await fetch("/api/ask", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        question,
-        contextTitle: doc.title,
-        context,
-        history: chatHistory.slice(-8),
-      }),
-    });
-
-    if (!response.ok) {
-      if ([404, 405, 501].includes(response.status)) {
-        throw new Error(
-          "AI 后端未部署。GitHub Pages 只能托管静态页面, 需要把本仓库部署到 Vercel 并设置 DEEPSEEK_API_KEY。",
-        );
-      }
-      let errorText = "";
-      try {
-        const errorData = await response.json();
-        errorText = errorData?.error || "";
-      } catch {
-        errorText = "";
-      }
-      throw new Error(errorText || `AI 请求失败: HTTP ${response.status}`);
-    }
-
-    const data = await response.json();
-    const answer = data.answer || "没有拿到有效回答。";
-    appendMessage("assistant", answer);
-    chatHistory.push({ role: "assistant", content: answer });
-    setAiStatus("已连接");
-  } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "AI 请求失败。请稍后再试。";
-    appendMessage("assistant", message);
-    setAiStatus("未配置或请求失败");
-  } finally {
-    if (askButton) askButton.disabled = false;
-  }
-};
-
-chatForm?.addEventListener("submit", (event) => {
   event.preventDefault();
-  const formData = new FormData(chatForm);
-  const question = String(formData.get("question") || "").trim();
-  if (!question) return;
-
-  appendMessage("user", question);
-  chatHistory.push({ role: "user", content: question });
-  chatForm.reset();
-  askAi(question);
-});
-
-clearChatButton?.addEventListener("click", () => {
-  chatHistory = [];
-  if (chatLog) {
-    chatLog.innerHTML =
-      '<div class="chat-message assistant"><strong>AI</strong><p>对话已清空。继续问我某个概念、公式或者题目怎么做。</p></div>';
-  }
-  setAiStatus("等待提问");
+  openDocument(docId, {
+    scroll: true,
+    anchor: url.searchParams.get("anchor") || "",
+  });
 });
 
 copyLinkButton?.addEventListener("click", async () => {
   const url = new URL(window.location.href);
   url.searchParams.set("doc", currentDoc);
+
+  if (currentAnchor) {
+    url.searchParams.set("anchor", currentAnchor);
+  } else {
+    url.searchParams.delete("anchor");
+  }
+
   url.hash = "reader";
 
   try {
@@ -306,7 +283,13 @@ copyLinkButton?.addEventListener("click", async () => {
   }
 });
 
-const initialDoc = new URLSearchParams(window.location.search).get("doc") || "quick";
+const initialParams = new URLSearchParams(window.location.search);
+const initialDoc = initialParams.get("doc") || "quick";
+const initialAnchor = initialParams.get("anchor") || "";
+
 updateHeader();
 window.addEventListener("scroll", updateHeader, { passive: true });
-openDocument(initialDoc, { scroll: window.location.hash === "#reader" });
+openDocument(initialDoc, {
+  anchor: initialAnchor,
+  scroll: window.location.hash === "#reader" || Boolean(initialAnchor),
+});

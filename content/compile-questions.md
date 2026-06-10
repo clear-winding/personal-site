@@ -2,6 +2,18 @@
 
 说明: 题目按知识点分组。每题后给了答案要点, 方便自测。真正复习时建议先遮住答案要点独立做。
 
+## 做题前先补这些难点
+
+- [编译器流水线](?doc=deep-dive&anchor=compile-pipeline#reader)
+- [正规式、NFA、DFA](?doc=deep-dive&anchor=compile-nfa-dfa#reader)
+- [FIRST/FOLLOW](?doc=deep-dive&anchor=compile-first-follow#reader) 与 [LL(1)](?doc=deep-dive&anchor=compile-ll1#reader)
+- [左递归与左公因子](?doc=deep-dive&anchor=compile-left-recursion#reader)
+- [LR 项目集与冲突](?doc=deep-dive&anchor=compile-lr-items#reader)
+- [属性文法与语法制导翻译](?doc=deep-dive&anchor=compile-syntax-directed#reader)
+- [三地址码与四元式](?doc=deep-dive&anchor=compile-three-address#reader)
+- [活动记录与运行时存储](?doc=deep-dive&anchor=compile-runtime#reader)
+- [数据流分析](?doc=deep-dive&anchor=compile-data-flow#reader) 与 [寄存器分配](?doc=deep-dive&anchor=compile-register-allocation#reader)
+
 ## 一、编译器总论
 
 1. 什么是编译程序？它和解释程序的主要区别是什么？

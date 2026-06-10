@@ -2,6 +2,23 @@
 
 来源范围: `Network` 主目录第 0 到第 7 章课件 PDF, 并参考 `homework` 中 Chapter 1/2/5 Assignments 的题型。实验、抓包、eNSP、project、课程论文和参考书整本 PDF 已排除。
 
+## 重点难点直达
+
+- [分层模型](?doc=deep-dive&anchor=network-layering#reader)
+- [时延、吞吐量与带宽](?doc=deep-dive&anchor=network-delay#reader)
+- [奈奎斯特与香农公式](?doc=deep-dive&anchor=network-nyquist-shannon#reader)
+- [CRC 差错检测](?doc=deep-dive&anchor=network-crc#reader)
+- [滑动窗口、GBN、SR](?doc=deep-dive&anchor=network-sliding-window#reader)
+- [CSMA/CD 与 CSMA/CA](?doc=deep-dive&anchor=network-csma#reader)
+- [VLAN 与 STP](?doc=deep-dive&anchor=network-vlan-stp#reader)
+- [路由算法](?doc=deep-dive&anchor=network-routing#reader)
+- [子网与 CIDR](?doc=deep-dive&anchor=network-subnet-cidr#reader)
+- [IP 分片](?doc=deep-dive&anchor=network-ip-fragment#reader)
+- [ARP、ICMP、NAT](?doc=deep-dive&anchor=network-arp-icmp-nat#reader)
+- [TCP 三次握手与释放](?doc=deep-dive&anchor=network-tcp-handshake#reader)
+- [TCP 拥塞控制](?doc=deep-dive&anchor=network-tcp-congestion#reader)
+- [DNS、HTTP、DHCP](?doc=deep-dive&anchor=network-dns-http-dhcp#reader)
+
 ## 0. 一句话总览
 
 计算机网络研究的是: 不同主机如何通过协议分层、交换、寻址、路由、可靠传输和应用协议完成通信。

@@ -2,6 +2,21 @@
 
 来源范围: `Compile` 主目录下的 PDF/PPTX 课件。实验目录已排除。
 
+## 重点难点直达
+
+- [编译器流水线](?doc=deep-dive&anchor=compile-pipeline#reader)
+- [正规式与正规集](?doc=deep-dive&anchor=compile-regular-expression#reader)
+- [NFA、DFA 与最长匹配](?doc=deep-dive&anchor=compile-nfa-dfa#reader)
+- [FIRST、FOLLOW](?doc=deep-dive&anchor=compile-first-follow#reader)
+- [LL(1) 分析表](?doc=deep-dive&anchor=compile-ll1#reader)
+- [左递归与左公因子](?doc=deep-dive&anchor=compile-left-recursion#reader)
+- [LR 项目集与冲突](?doc=deep-dive&anchor=compile-lr-items#reader)
+- [属性文法与语法制导翻译](?doc=deep-dive&anchor=compile-syntax-directed#reader)
+- [三地址码与四元式](?doc=deep-dive&anchor=compile-three-address#reader)
+- [活动记录与运行时存储](?doc=deep-dive&anchor=compile-runtime#reader)
+- [基本块、CFG 与数据流分析](?doc=deep-dive&anchor=compile-data-flow#reader)
+- [寄存器分配与图着色](?doc=deep-dive&anchor=compile-register-allocation#reader)
+
 ## 0. 一句话总览
 
 编译器做的事情是: 把一种语言写的程序, 在保持语义不变的前提下, 翻译成另一种语言的程序。最常见的是把高级语言翻译成机器码或汇编代码。

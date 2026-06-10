@@ -2,6 +2,21 @@
 
 来源范围: `RISC-V` 主目录下的课程 PDF 与 RISC-V Green Card。`hw` 里的作业 PDF 多为图片/异常 PDF, 没有作为正文来源；实验内容不纳入。
 
+## 重点难点直达
+
+- [Amdahl 定律](?doc=deep-dive&anchor=riscv-amdahl#reader)
+- [CPU 性能公式](?doc=deep-dive&anchor=riscv-cpu-performance#reader)
+- [补码与溢出](?doc=deep-dive&anchor=riscv-twos-complement#reader)
+- [IEEE 754 浮点数](?doc=deep-dive&anchor=riscv-ieee754#reader)
+- [加法器与先行进位](?doc=deep-dive&anchor=riscv-adder#reader)
+- [寻址方式与有效地址](?doc=deep-dive&anchor=riscv-addressing#reader)
+- [RISC-V 指令格式](?doc=deep-dive&anchor=riscv-instruction-format#reader)
+- [总线、I/O、中断、DMA](?doc=deep-dive&anchor=riscv-bus-io-dma#reader)
+- [Cache 映像与平均访问时间](?doc=deep-dive&anchor=riscv-cache#reader)
+- [虚拟存储、页表、TLB](?doc=deep-dive&anchor=riscv-virtual-memory#reader)
+- [微程序控制](?doc=deep-dive&anchor=riscv-microprogram#reader)
+- [流水线冒险](?doc=deep-dive&anchor=riscv-pipeline-hazards#reader)
+
 ## 0. 一句话总览
 
 这门课研究的是: 一台计算机如何从“指令集这个软硬件接口”出发, 组织数据表示、运算器、存储器、总线、I/O 和 CPU 控制, 让程序正确且高效地运行。

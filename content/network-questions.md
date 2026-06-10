@@ -2,6 +2,17 @@
 
 说明: 题目覆盖第 1 到第 7 章, 含课件重点和 homework 类似题型。每题后有答案要点。
 
+## 做题前先补这些难点
+
+- [分层模型](?doc=deep-dive&anchor=network-layering#reader)
+- [时延、吞吐量与带宽](?doc=deep-dive&anchor=network-delay#reader)
+- [奈奎斯特与香农公式](?doc=deep-dive&anchor=network-nyquist-shannon#reader)
+- [CRC](?doc=deep-dive&anchor=network-crc#reader) 与 [滑动窗口](?doc=deep-dive&anchor=network-sliding-window#reader)
+- [CSMA](?doc=deep-dive&anchor=network-csma#reader)、[VLAN/STP](?doc=deep-dive&anchor=network-vlan-stp#reader)
+- [路由](?doc=deep-dive&anchor=network-routing#reader)、[子网](?doc=deep-dive&anchor=network-subnet-cidr#reader) 与 [分片](?doc=deep-dive&anchor=network-ip-fragment#reader)
+- [TCP 三次握手](?doc=deep-dive&anchor=network-tcp-handshake#reader) 与 [拥塞控制](?doc=deep-dive&anchor=network-tcp-congestion#reader)
+- [DNS、HTTP、DHCP](?doc=deep-dive&anchor=network-dns-http-dhcp#reader)
+
 ## 一、网络概论与分层
 
 1. 什么是协议？协议通常规定哪三类内容？

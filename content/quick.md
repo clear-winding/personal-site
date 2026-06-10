@@ -10,15 +10,15 @@
 
 ### 高频必会
 
-- 正规式、NFA、DFA、最长匹配。
-- FIRST/FOLLOW、LL(1) 表。
-- 消除左递归、提取左公因子。
-- LR(0)/SLR/LR(1)/LALR 项目集和冲突。
-- 属性文法、综合属性、继承属性。
-- 三地址码、四元式、if/while/do-while 翻译。
-- 活动记录、栈/堆/静态分配、GC。
-- 基本块、CFG、DAG、数据流分析、循环优化。
-- 寄存器分配、图着色、spilling。
+- [正规式](?doc=deep-dive&anchor=compile-regular-expression#reader)、[NFA/DFA/最长匹配](?doc=deep-dive&anchor=compile-nfa-dfa#reader)。
+- [FIRST/FOLLOW](?doc=deep-dive&anchor=compile-first-follow#reader)、[LL(1) 表](?doc=deep-dive&anchor=compile-ll1#reader)。
+- [消除左递归、提取左公因子](?doc=deep-dive&anchor=compile-left-recursion#reader)。
+- [LR(0)/SLR/LR(1)/LALR 项目集和冲突](?doc=deep-dive&anchor=compile-lr-items#reader)。
+- [属性文法、综合属性、继承属性](?doc=deep-dive&anchor=compile-syntax-directed#reader)。
+- [三地址码、四元式](?doc=deep-dive&anchor=compile-three-address#reader)、if/while/do-while 翻译。
+- [活动记录、栈/堆/静态分配](?doc=deep-dive&anchor=compile-runtime#reader)、GC。
+- [基本块、CFG、DAG、数据流分析](?doc=deep-dive&anchor=compile-data-flow#reader)、循环优化。
+- [寄存器分配、图着色、spilling](?doc=deep-dive&anchor=compile-register-allocation#reader)。
 
 ### 常用模板
 
@@ -52,7 +52,7 @@ ifTrue E.place goto L_begin
 
 ## Network 计算机网络
 
-### 分层速记
+### [分层速记](?doc=deep-dive&anchor=network-layering#reader)
 
 ```text
 应用层: HTTP DNS FTP Email DHCP
@@ -62,7 +62,7 @@ ifTrue E.place goto L_begin
 物理层: bit 信号 编码 调制 介质
 ```
 
-### 时延
+### [时延](?doc=deep-dive&anchor=network-delay#reader)
 
 ```text
 传输时延 = L / R
@@ -70,7 +70,7 @@ ifTrue E.place goto L_begin
 总时延 = 处理 + 排队 + 传输 + 传播
 ```
 
-### 信道容量
+### [信道容量](?doc=deep-dive&anchor=network-nyquist-shannon#reader)
 
 ```text
 Nyquist: C = 2B log2(V)
@@ -78,14 +78,14 @@ Shannon: C = B log2(1 + S/N)
 dB = 10 log10(S/N)
 ```
 
-### 滑动窗口
+### [滑动窗口](?doc=deep-dive&anchor=network-sliding-window#reader)
 
 ```text
 GBN 最大窗口 = 2^k - 1
 SR 最大窗口 = 2^(k-1)
 ```
 
-### 子网
+### [子网](?doc=deep-dive&anchor=network-subnet-cidr#reader)
 
 ```text
 主机位 = 32 - 前缀长度
@@ -95,14 +95,14 @@ SR 最大窗口 = 2^(k-1)
 最长前缀匹配 = 选最具体路由
 ```
 
-### IP 分片
+### [IP 分片](?doc=deep-dive&anchor=network-ip-fragment#reader)
 
 - 每片数据长度不超过 `MTU - IP首部长度`。
 - 除最后一片外, 数据长度应是 8 Byte 的整数倍。
 - Fragment Offset 单位是 8 Byte。
 - 前面分片 `MF=1`, 最后一片 `MF=0`。
 
-### TCP
+### [TCP](?doc=deep-dive&anchor=network-tcp-handshake#reader)
 
 ```text
 发送窗口 = min(rwnd, cwnd)
@@ -116,21 +116,21 @@ SR 最大窗口 = 2^(k-1)
 
 ## RISC-V 组成与体系结构
 
-### Amdahl 定律
+### [Amdahl 定律](?doc=deep-dive&anchor=riscv-amdahl#reader)
 
 ```text
 Sn = 1 / ((1 - Fe) + Fe / Se)
 极限 Sn <= 1 / (1 - Fe)
 ```
 
-### CPU 性能
+### [CPU 性能](?doc=deep-dive&anchor=riscv-cpu-performance#reader)
 
 ```text
 CPU time = IC * CPI * Clock Cycle Time
 CPU time = IC * CPI / Clock Rate
 ```
 
-### 补码
+### [补码](?doc=deep-dive&anchor=riscv-twos-complement#reader)
 
 ```text
 n 位补码范围 = -2^(n-1) 到 2^(n-1)-1
@@ -138,14 +138,14 @@ n 位补码范围 = -2^(n-1) 到 2^(n-1)-1
 最高位进位与次高位进位不同 -> 溢出
 ```
 
-### IEEE 754 单精度
+### [IEEE 754 单精度](?doc=deep-dive&anchor=riscv-ieee754#reader)
 
 ```text
 1 位符号 + 8 位阶码 + 23 位尾数
 value = (-1)^S * 1.fraction * 2^(E - 127)
 ```
 
-### Cache
+### [Cache](?doc=deep-dive&anchor=riscv-cache#reader)
 
 ```text
 命中率 H = 命中次数 / 总访问次数
@@ -163,13 +163,13 @@ index/set = log2(行数或组数)
 tag = 地址总位数 - offset - index/set
 ```
 
-### 总线
+### [总线](?doc=deep-dive&anchor=riscv-bus-io-dma#reader)
 
 ```text
 总线带宽 = 总线宽度(bit) * 频率 / 8
 ```
 
-### RISC-V 指令速记
+### [RISC-V 指令速记](?doc=deep-dive&anchor=riscv-instruction-format#reader)
 
 - `x0` 恒为 0。
 - R-type: `add rd, rs1, rs2`
@@ -179,7 +179,7 @@ tag = 地址总位数 - offset - index/set
 - U-type: `lui`, `auipc`
 - J-type: `jal`
 
-### 流水线
+### [流水线](?doc=deep-dive&anchor=riscv-pipeline-hazards#reader)
 
 ```text
 五级: IF ID EX MEM WB

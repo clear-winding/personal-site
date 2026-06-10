@@ -2,6 +2,17 @@
 
 说明: 题目覆盖系统概论、数据表示与运算、指令系统、总线与 I/O、存储层次、CPU 与流水线。每题后给答案要点。
 
+## 做题前先补这些难点
+
+- [Amdahl 定律](?doc=deep-dive&anchor=riscv-amdahl#reader) 与 [CPU 性能公式](?doc=deep-dive&anchor=riscv-cpu-performance#reader)
+- [补码、溢出](?doc=deep-dive&anchor=riscv-twos-complement#reader)、[IEEE 754](?doc=deep-dive&anchor=riscv-ieee754#reader)
+- [加法器与先行进位](?doc=deep-dive&anchor=riscv-adder#reader)
+- [寻址方式](?doc=deep-dive&anchor=riscv-addressing#reader) 与 [RISC-V 指令格式](?doc=deep-dive&anchor=riscv-instruction-format#reader)
+- [总线、I/O、中断、DMA](?doc=deep-dive&anchor=riscv-bus-io-dma#reader)
+- [Cache 映像与平均访问时间](?doc=deep-dive&anchor=riscv-cache#reader)
+- [虚拟存储、页表、TLB](?doc=deep-dive&anchor=riscv-virtual-memory#reader)
+- [微程序控制](?doc=deep-dive&anchor=riscv-microprogram#reader) 与 [流水线冒险](?doc=deep-dive&anchor=riscv-pipeline-hazards#reader)
+
 ## 一、系统概论
 
 1. 简述存储程序思想的三个核心内容。
