@@ -3,6 +3,26 @@ const readerTitle = document.querySelector("[data-doc-title]");
 const readerContent = document.querySelector("[data-reader-content]");
 const copyLinkButton = document.querySelector("[data-copy-link]");
 
+const ensureReaderToc = () => {
+  const library = document.querySelector(".library");
+  if (!library) return null;
+
+  const toc = document.createElement("nav");
+  toc.className = "reader-toc";
+  toc.dataset.readerToc = "";
+  toc.hidden = true;
+  toc.setAttribute("aria-label", "当前资料目录");
+  toc.innerHTML = `
+    <p class="toc-label">本文目录</p>
+    <div class="toc-list" data-reader-toc-list></div>
+  `;
+  library.appendChild(toc);
+  return toc;
+};
+
+const readerToc = document.querySelector("[data-reader-toc]") || ensureReaderToc();
+const readerTocList = readerToc?.querySelector("[data-reader-toc-list]");
+
 const documents = {
   guide: {
     title: "复习整理说明",
@@ -100,12 +120,21 @@ const parseHeading = (rawText) => {
   return { id: "", text: rawText };
 };
 
+const createHeadingId = (text, index) => {
+  const slug = text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return slug ? `section-${index}-${slug}` : `section-${index}`;
+};
+
 const renderMarkdown = (markdown) => {
   const lines = markdown.replace(/\r\n/g, "\n").split("\n");
   let html = "";
   let paragraph = [];
   let listType = null;
   let code = null;
+  let headingIndex = 0;
 
   const flushParagraph = () => {
     if (!paragraph.length) return;
@@ -160,7 +189,9 @@ const renderMarkdown = (markdown) => {
       closeList();
       const level = heading[1].length;
       const parsed = parseHeading(heading[2]);
-      const idAttribute = parsed.id ? ` id="${parsed.id}"` : "";
+      headingIndex += 1;
+      const headingId = parsed.id || createHeadingId(parsed.text, headingIndex);
+      const idAttribute = ` id="${headingId}"`;
       html += `<h${level}${idAttribute}>${renderInline(parsed.text)}</h${level}>`;
       continue;
     }
@@ -188,6 +219,29 @@ const renderMarkdown = (markdown) => {
   flushParagraph();
   closeList();
   return html;
+};
+
+const buildReaderToc = () => {
+  if (!readerToc || !readerTocList || !readerContent) return;
+
+  const headings = Array.from(readerContent.querySelectorAll("h2, h3"))
+    .filter((heading) => heading.id && heading.textContent.trim())
+    .slice(0, 80);
+
+  if (!headings.length) {
+    readerToc.hidden = true;
+    readerTocList.innerHTML = "";
+    return;
+  }
+
+  readerToc.hidden = false;
+  readerTocList.innerHTML = headings
+    .map((heading) => {
+      const level = heading.tagName.toLowerCase() === "h3" ? "toc-level-3" : "toc-level-2";
+      const label = escapeHtml(heading.textContent.trim());
+      return `<a class="${level}" href="#${heading.id}">${label}</a>`;
+    })
+    .join("");
 };
 
 const setActiveButton = (docId) => {
@@ -234,8 +288,10 @@ const openDocument = async (docId, options = {}) => {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const markdown = await response.text();
     if (readerContent) readerContent.innerHTML = renderMarkdown(markdown);
+    buildReaderToc();
   } catch {
     currentAnchor = "";
+    buildReaderToc();
     if (readerContent) {
       readerContent.innerHTML =
         "<p>这份资料暂时没有加载成功。请刷新页面，或检查网络连接后再试。</p>";
@@ -248,6 +304,16 @@ const openDocument = async (docId, options = {}) => {
     scrollToReader(currentAnchor);
   }
 };
+
+readerToc?.addEventListener("click", (event) => {
+  const link = event.target.closest("a[href^='#']");
+  if (!link) return;
+
+  event.preventDefault();
+  currentAnchor = link.getAttribute("href").slice(1);
+  setUrlDoc(currentDoc, currentAnchor);
+  scrollToReader(currentAnchor);
+});
 
 document.querySelectorAll("[data-open-doc]").forEach((trigger) => {
   trigger.addEventListener("click", (event) => {

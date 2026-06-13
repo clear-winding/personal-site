@@ -352,6 +352,9 @@ h3 {
 .library {
   position: sticky;
   top: 92px;
+  max-height: calc(100vh - 112px);
+  overflow: auto;
+  padding-right: 4px;
 }
 
 .library h2 {
@@ -376,6 +379,51 @@ h3 {
   background: var(--ink);
   color: var(--paper);
   border-color: var(--ink);
+}
+
+.reader-toc {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--paper-line);
+}
+
+.reader-toc[hidden] {
+  display: none;
+}
+
+.toc-label {
+  margin: 0 0 10px;
+  color: #b24a3f;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.toc-list {
+  display: grid;
+  gap: 3px;
+}
+
+.toc-list a {
+  display: block;
+  padding: 6px 8px;
+  border-left: 2px solid rgba(24, 27, 29, 0.16);
+  color: #4f5555;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.toc-list a:hover,
+.toc-list a:focus-visible {
+  border-left-color: #b24a3f;
+  background: rgba(24, 27, 29, 0.05);
+  color: var(--ink);
+}
+
+.toc-list .toc-level-3 {
+  padding-left: 18px;
+  font-size: 13px;
 }
 
 .reader-panel {
@@ -541,10 +589,17 @@ h3 {
 
   .library {
     position: static;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
   }
 
   .library-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .reader-toc {
+    margin-top: 18px;
   }
 }
 

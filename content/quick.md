@@ -211,18 +211,22 @@ add x3, x1, x4
 
 ### 高频必会
 
+- 2026 老师资料优先范围: 绪论、生命周期方法学、需求分析、软件设计基础、总体设计、详细设计、编码、测试、OOA、OOD、维护、项目管理。
 - [软件 = 程序 + 数据 + 文档](?doc=deep-dive&anchor=software-crisis#reader)，软件工程三要素 = 方法、工具、过程。
+- 软件危机错误观念: 开发软件就是编程；程序能运行就结束；软件很容易修改；增加人员可以加快进度。
 - [过程模型](?doc=deep-dive&anchor=software-process-models#reader): 瀑布适合需求明确，原型适合需求不清，增量适合分批交付，螺旋强调风险，敏捷强调快速反馈。
 - [需求工程](?doc=deep-dive&anchor=software-requirements#reader): 可行性分析、需求获取、需求分析建模、SRS、需求评审、变更管理。
 - [DFD](?doc=deep-dive&anchor=software-dfd#reader): 外部实体、加工、数据流、数据存储。箭头是数据流，不是控制流。
 - [软件设计](?doc=deep-dive&anchor=software-design#reader): 概要设计管结构，详细设计管模块内部过程。
+- 模块四属性: 输入、输出、逻辑功能、内部数据。
 - [高内聚低耦合](?doc=deep-dive&anchor=software-cohesion-coupling#reader): 功能内聚最好，内容耦合最差。
 - [结构化设计](?doc=deep-dive&anchor=software-structured-design#reader): 变换分析看输入-处理-输出，事务分析看事务中心和多条路径。
 - [测试](?doc=deep-dive&anchor=software-testing#reader): 测试是为了发现错误，不是证明无错。
+- 测试策略老师版: 单元测试、集成测试、系统测试、验收测试；自顶向下用桩模块，自底向上用驱动模块。
 - [白盒测试](?doc=deep-dive&anchor=software-white-box#reader): `V(G)=判定结点数+1`。
 - [黑盒测试](?doc=deep-dive&anchor=software-black-box#reader): 等价类、边界值、因果图、判定表。
 - [UML](?doc=deep-dive&anchor=software-uml#reader): 用例图看功能，类图看静态结构，顺序图看消息顺序，状态图看状态变化。
-- [维护](?doc=deep-dive&anchor=software-maintenance#reader): 纠错、适应、完善、预防。
+- [维护](?doc=deep-dive&anchor=software-maintenance#reader): 纠错、适应、完善、预防；老师版可维护性优先背可理解性、可测试性、可修改性。
 - [项目管理](?doc=deep-dive&anchor=software-project-management#reader): LOC、FP、甘特图、网络图、CMM、配置管理基线。
 
 ### 常用模板
